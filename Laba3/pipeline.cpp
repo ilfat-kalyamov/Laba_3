@@ -1,5 +1,5 @@
 #include "pipeline.h"
-
+#include <math.h>
 
 const Matrix4f* Pipeline::GetTrans()
 {

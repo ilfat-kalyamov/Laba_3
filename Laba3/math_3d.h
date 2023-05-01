@@ -4,27 +4,46 @@
 #include <stdio.h>
 #include <math.h>
 
-static const float M_PI = 3.1415;
+#define M_PI       3.14159265358979323846   // pi
 
+// Преорбазуют градусы в радианы и наоборот
 #define ToRadian(x) ((x) * M_PI / 180.0f)
 #define ToDegree(x) ((x) * 180.0f / M_PI)
 
+// Структура для позиции мыши
 struct Vector2i
 {
     int x;
     int y;
 };
 
+// Структура для координат текстуры
+struct Vector2f
+{
+    float x;
+    float y;
+
+    Vector2f()
+    {
+    }
+
+    Vector2f(float _x, float _y)
+    {
+        x = _x;
+        y = _y;
+    }
+};
+
 struct Vector3f
 {
+    // Координаты x, y, z для вектора
     float x;
     float y;
     float z;
 
-    Vector3f()
-    {
-    }
+    Vector3f() : x(0), y(0), z(0) {}
 
+    // Вектор позиции
     Vector3f(float _x, float _y, float _z)
     {
         x = _x;
@@ -32,6 +51,7 @@ struct Vector3f
         z = _z;
     }
 
+    // Складывает один вектор с другим
     Vector3f& operator+=(const Vector3f& r)
     {
         x += r.x;
@@ -41,6 +61,7 @@ struct Vector3f
         return *this;
     }
 
+    // Вычитает
     Vector3f& operator-=(const Vector3f& r)
     {
         x -= r.x;
@@ -50,6 +71,7 @@ struct Vector3f
         return *this;
     }
 
+    // Умножает
     Vector3f& operator*=(float f)
     {
         x *= f;
@@ -59,11 +81,14 @@ struct Vector3f
         return *this;
     }
 
+    // Умножение векторов (для находения вектора, перпендикулярного векторам слева и справо в функции Cross
     Vector3f Cross(const Vector3f& v) const;
 
+    // нормализация вектора
     Vector3f& Normalize();
 
-    void Rotate(float Angle, const Vector3f& Axis);
+    // Вращения вектора на угол Angle вокруг вектора Axis
+    void Rotate(float Angle, const Vector3f& Axe);
 
     void Print() const
     {
@@ -71,16 +96,7 @@ struct Vector3f
     }
 };
 
-
-inline Vector3f operator+(const Vector3f& l, const Vector3f& r)
-{
-    Vector3f Ret(l.x + r.x,
-        l.y + r.y,
-        l.z + r.z);
-
-    return Ret;
-}
-
+// Вычитание двуз векторов
 inline Vector3f operator-(const Vector3f& l, const Vector3f& r)
 {
     Vector3f Ret(l.x - r.x,
@@ -90,6 +106,7 @@ inline Vector3f operator-(const Vector3f& l, const Vector3f& r)
     return Ret;
 }
 
+// Умножение вектора l на значение f
 inline Vector3f operator*(const Vector3f& l, float f)
 {
     Vector3f Ret(l.x * f,
@@ -99,17 +116,17 @@ inline Vector3f operator*(const Vector3f& l, float f)
     return Ret;
 }
 
-
 class Matrix4f
 {
 public:
+    // Матрица преобразования
     float m[4][4];
 
     Matrix4f()
     {
     }
 
-
+    // Инициализирование единичной матрицы
     inline void InitIdentity()
     {
         m[0][0] = 1.0f; m[0][1] = 0.0f; m[0][2] = 0.0f; m[0][3] = 0.0f;
@@ -118,6 +135,7 @@ public:
         m[3][0] = 0.0f; m[3][1] = 0.0f; m[3][2] = 0.0f; m[3][3] = 1.0f;
     }
 
+    // Умножение матриц
     inline Matrix4f operator*(const Matrix4f& Right) const
     {
         Matrix4f Ret;
@@ -141,15 +159,19 @@ public:
     void InitPersProjTransform(float FOV, float Width, float Height, float zNear, float zFar);
 };
 
-
+// Квантернион для вращения вектора вокруг другого вектора
 struct Quaternion
 {
+    // Координаты
     float x, y, z, w;
 
+    // Конструктор
     Quaternion(float _x, float _y, float _z, float _w);
 
+    // Нормализация
     void Normalize();
 
+    // Возвращает квантернион с обратными значениями x, y, z
     Quaternion Conjugate();
 };
 

@@ -1,5 +1,6 @@
 #include "math_3d.h"
 
+// Векторное умножение
 Vector3f Vector3f::Cross(const Vector3f& v) const
 {
     const float _x = y * v.z - z * v.y;
@@ -9,6 +10,7 @@ Vector3f Vector3f::Cross(const Vector3f& v) const
     return Vector3f(_x, _y, _z);
 }
 
+// Приведение к еденичному вектору
 Vector3f& Vector3f::Normalize()
 {
     const float Length = sqrtf(x * x + y * y + z * z);
@@ -20,6 +22,7 @@ Vector3f& Vector3f::Normalize()
     return *this;
 }
 
+// Вращение вектора на угол Angle вокруг вектора Axe
 void Vector3f::Rotate(float Angle, const Vector3f& Axe)
 {
     const float SinHalfAngle = sinf(ToRadian(Angle / 2));
@@ -40,7 +43,7 @@ void Vector3f::Rotate(float Angle, const Vector3f& Axe)
     z = W.z;
 }
 
-
+// Масштаб
 void Matrix4f::InitScaleTransform(float ScaleX, float ScaleY, float ScaleZ)
 {
     m[0][0] = ScaleX; m[0][1] = 0.0f;   m[0][2] = 0.0f;   m[0][3] = 0.0f;
@@ -49,6 +52,7 @@ void Matrix4f::InitScaleTransform(float ScaleX, float ScaleY, float ScaleZ)
     m[3][0] = 0.0f;   m[3][1] = 0.0f;   m[3][2] = 0.0f;   m[3][3] = 1.0f;
 }
 
+// Вращение
 void Matrix4f::InitRotateTransform(float RotateX, float RotateY, float RotateZ)
 {
     Matrix4f rx, ry, rz;
@@ -75,6 +79,7 @@ void Matrix4f::InitRotateTransform(float RotateX, float RotateY, float RotateZ)
     *this = rz * ry * rx;
 }
 
+// Расположение
 void Matrix4f::InitTranslationTransform(float x, float y, float z)
 {
     m[0][0] = 1.0f; m[0][1] = 0.0f; m[0][2] = 0.0f; m[0][3] = x;
@@ -83,7 +88,7 @@ void Matrix4f::InitTranslationTransform(float x, float y, float z)
     m[3][0] = 0.0f; m[3][1] = 0.0f; m[3][2] = 0.0f; m[3][3] = 1.0f;
 }
 
-
+// Матрица для преобразования камеры
 void Matrix4f::InitCameraTransform(const Vector3f& Target, const Vector3f& Up)
 {
     Vector3f N = Target;
@@ -99,6 +104,7 @@ void Matrix4f::InitCameraTransform(const Vector3f& Target, const Vector3f& Up)
     m[3][0] = 0.0f;  m[3][1] = 0.0f;  m[3][2] = 0.0f;  m[3][3] = 1.0f;
 }
 
+// Матрица преобразования проекции
 void Matrix4f::InitPersProjTransform(float FOV, float Width, float Height, float zNear, float zFar)
 {
     const float ar = Width / Height;
@@ -110,7 +116,6 @@ void Matrix4f::InitPersProjTransform(float FOV, float Width, float Height, float
     m[2][0] = 0.0f;                   m[2][1] = 0.0f;            m[2][2] = (-zNear - zFar) / zRange; m[2][3] = 2.0f * zFar * zNear / zRange;
     m[3][0] = 0.0f;                   m[3][1] = 0.0f;            m[3][2] = 1.0f;          m[3][3] = 0.0;
 }
-
 
 Quaternion::Quaternion(float _x, float _y, float _z, float _w)
 {

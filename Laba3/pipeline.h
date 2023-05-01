@@ -1,3 +1,4 @@
+#pragma once
 #ifndef PIPELINE_H
 #define	PIPELINE_H
 
@@ -6,6 +7,7 @@
 class Pipeline
 {
 public:
+    // Конструктор, настраивающий векторы по умолчанию
     Pipeline()
     {
         m_scale = Vector3f(1.0f, 1.0f, 1.0f);
@@ -13,6 +15,7 @@ public:
         m_rotateInfo = Vector3f(0.0f, 0.0f, 0.0f);
     }
 
+    // Настройка масштаба
     void Scale(float ScaleX, float ScaleY, float ScaleZ)
     {
         m_scale.x = ScaleX;
@@ -20,6 +23,7 @@ public:
         m_scale.z = ScaleZ;
     }
 
+    // Позиция в виртуальном мире
     void WorldPos(float x, float y, float z)
     {
         m_worldPos.x = x;
@@ -27,6 +31,7 @@ public:
         m_worldPos.z = z;
     }
 
+    // Настройка вращения
     void Rotate(float RotateX, float RotateY, float RotateZ)
     {
         m_rotateInfo.x = RotateX;
@@ -34,6 +39,7 @@ public:
         m_rotateInfo.z = RotateZ;
     }
 
+    // Настройка проекции перспективы
     void SetPerspectiveProj(float FOV, float Width, float Height, float zNear, float zFar)
     {
         m_persProj.FOV = FOV;
@@ -43,6 +49,7 @@ public:
         m_persProj.zFar = zFar;
     }
 
+    // Настройка камеры
     void SetCamera(const Vector3f& Pos, const Vector3f& Target, const Vector3f& Up)
     {
         m_camera.Pos = Pos;
@@ -53,10 +60,12 @@ public:
     const Matrix4f* GetTrans();
 
 private:
-    Vector3f m_scale;
-    Vector3f m_worldPos;
-    Vector3f m_rotateInfo;
 
+    Vector3f m_scale; // Масштаб
+    Vector3f m_worldPos; // Позиция
+    Vector3f m_rotateInfo; // Вращение
+
+    // Структура для проекции перспективы
     struct {
         float FOV;
         float Width;
@@ -65,6 +74,7 @@ private:
         float zFar;
     } m_persProj;
 
+    // Структура описывающая камеру
     struct {
         Vector3f Pos;
         Vector3f Target;
