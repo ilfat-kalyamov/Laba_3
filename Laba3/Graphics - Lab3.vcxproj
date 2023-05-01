@@ -24,7 +24,7 @@
     <ProjectGuid>{9938af70-8527-4ba2-948e-ec28c59997dc}</ProjectGuid>
     <RootNamespace>GraphicsLab3</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <ProjectName>tutorial_20</ProjectName>
+    <ProjectName>tutorial_21</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
