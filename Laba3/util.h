@@ -1,3 +1,6 @@
+#ifndef UTIL_H
+#define UTIL_H
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <string>
@@ -94,3 +97,5 @@ string GetDirFromFilename(const string& Filename);
 #define MAX_BONES (200)
 
 #define CLAMP(Val, Start, End) Val = std::min(std::max(Val, (Start)), (End));
+
+#endif // !UTIL_H

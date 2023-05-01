@@ -35,7 +35,6 @@ public:
 
 private:
     void LoadInternal(void* image_data);
-
     std::string m_fileName; // Имя файла
     GLenum m_textureTarget; // Грубо говоря мерность текстуры
     GLuint m_textureObj; // Данные о самом изображении текстуры: тексели
