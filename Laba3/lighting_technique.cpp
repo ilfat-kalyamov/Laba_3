@@ -29,8 +29,8 @@ void main()                                                                     
 static const char* pFS = "                                                          \n\
 #version 330                                                                        \n\
                                                                                     \n\
-const int MAX_POINT_LIGHTS = 2;                                                     \n\
-const int MAX_SPOT_LIGHTS = 2;                                                      \n\
+const int MAX_POINT_LIGHTS = 3;                                                     \n\
+const int MAX_SPOT_LIGHTS = 3;                                                      \n\
                                                                                     \n\
 in vec2 TexCoord0;                                                                  \n\
 in vec3 Normal0;                                                                    \n\

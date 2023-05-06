@@ -63,8 +63,8 @@ struct SpotLight : public PointLight
 class LightingTechnique : public Technique {
 public:
 
-    static const unsigned int MAX_POINT_LIGHTS = 2;
-    static const unsigned int MAX_SPOT_LIGHTS = 2;
+    static const unsigned int MAX_POINT_LIGHTS = 3;
+    static const unsigned int MAX_SPOT_LIGHTS = 3;
 
     LightingTechnique();
 
@@ -193,8 +193,8 @@ struct SpotLight : public PointLight
 class LightingTechnique : public Technique {
 public:
 
-    static const unsigned int MAX_POINT_LIGHTS = 2;
-    static const unsigned int MAX_SPOT_LIGHTS = 2;
+    static const unsigned int MAX_POINT_LIGHTS = 3;
+    static const unsigned int MAX_SPOT_LIGHTS = 3;
 
     LightingTechnique();
 
